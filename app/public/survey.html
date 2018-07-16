@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Friend Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container">
+            <h2>Survey</h2>
+            <h4>1 is low, 5 is high</h4>
+            <form role="form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="name">Photo Link</label>
+                    <input type="text" class="form-control" id="phoneNum">
+                </div>
+                <div class="form-group">
+                    How do you feel about pets? (between 1 and 5):
+                    <input type="number" id="q1" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How do you feel about bowling? (between 1 and 5):
+                    <input type="number" id="q2" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How do you feel about books? (between 1 and 5):
+                    <input type="number" id="q3" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How do you feel about Dnd? (between 1 and 5):
+                    <input type="number" id="q4" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How do well do you like professional sports? (between 1 and 5):
+                    <input type="number" id="q5" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How well do you like theater (plays/musicals) (between 1 and 5):
+                    <input type="number" id="q6" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    Do you like see Movies at the theater? (between 1 and 5):
+                    <input type="number" id="q7" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    How about playing sports? (between 1 and 5):
+                    <input type="number" id="q8" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    Long walks on the beach? (between 1 and 5):
+                    <input type="number" id="q9" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    Milkshakes? (between 1 and 5):
+                    <input type="number" id="q10" min="1" max="5">
+                </div>
+
+            </form>
+            <br>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span>Find Me a Friend</button>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+        // Question: What does this code do?
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newUser = {
+            name: $("#name").val().trim(),
+            photo: $("#phoneNum").val().trim(),
+            scores: [$("#q1").val(),$("#q2").val(),$("#q3").val(),$("#q4").val(),$("#q5").val(),$("#q6").val(),$("#q7").val(),$("#q8").val(),$("#q9").val(),$("#q10").val()]
+          };
+          // Question: What does this code do??
+            $.post("/api/friends", newUser)
+            .then(function(data) {
+                console.log(data);
+                alert("Calculating best match...");
+            });
+        });
+    </script>
+</body>
+</html>
